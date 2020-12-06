@@ -1,6 +1,8 @@
 FROM centos:7
 
-RUN yum -y install openssh-server
+RUN yum -y install openssh-server && \
+    yum -y install unzip && \
+    yum -y install less
 
 RUN useradd remote_user && \
     echo "remote_user:1234" | chpasswd && \
@@ -16,8 +18,8 @@ RUN /usr/sbin/sshd-keygen
 
 RUN yum -y install mysql
 
-RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
-    python get-pip.py && \
-    pip install awscli --upgrade    
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+    unzip awscliv2.zip && \
+    ./aws/install
 
 CMD /usr/sbin/sshd -D

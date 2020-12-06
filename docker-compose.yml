@@ -2,7 +2,9 @@ version: '3'
 services:
   jenkins:
     container_name: jenkins
-    image: jenkins/jenkins
+    image: jenkins_ansible
+    build: 
+      context: jenkins-ansible
     ports: 
       - "8080:8080"
     volumes: 
@@ -26,6 +28,15 @@ services:
     volumes: 
       - "$PWD/db_data:/var/lib/mysql"
     networks:
+      - net
+  web:
+    container_name: web
+    image: ansible-web
+    build:
+      context: web
+    ports: 
+      - "80:80"
+    networks: 
       - net
 networks: 
   net:
