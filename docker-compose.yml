@@ -30,14 +30,14 @@ services:
       - "$PWD/db_data:/var/lib/mysql"
     networks:
       - net
-  web:
-    container_name: web
-    image: ansible-web
-    build:
-      context: web
-    ports: 
-      - "80:80"
-    networks: 
-      - net
+  # web:
+  #   container_name: web
+  #   image: ansible-web
+  #   build:
+  #     context: web
+  #   ports: 
+  #     - "80:80"
+  #   networks: 
+  #     - net
 networks: 
   net:
